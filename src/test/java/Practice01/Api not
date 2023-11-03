@@ -1,0 +1,65 @@
+API PRACTICE1:
+thinking-tester-contact-list.herokuapp.com
+Siteye kayit olduk ve bilgilerimizi girerek contact list olusturduk. Contact List olarak gordugumuz yer UI kismi.
+Bilgilerimiz veritabanina kaydedildi. Bilgiler istenirken UI kisminda gorunse de oradan degil API ile veritabanindan cagrilir.
+Bu sitede The API documentation can be found here yazisinda here’a tikladik. Contact List Documentation sayfasi acildi.
+Bu API dokumani ile islemler yapacagiz. Boyle bir dokuman olmadan API testi yapamayiz. Dokumanda sol ust kosede
+Contacts’I acinca asagiya dogru sirali halde Add Contact, Get Contact, Update Contact, Delete Contact ve Get Contact List var.
+ Get Contact List’e tikladik. Orada https ile baslayan adresi kopyaladik ve postman’a gelidk
+Postman’da yeni bir collection actik. Practice collection. Add request yaptik ve Get’i secip url bar’a diger siteden
+copyaladigimiz url’I yapistirdik. Send sonrasi yetkimiz olmadigindan error’u gorduk. "error": "Please authenticate."
+Yetkiyi nasil aliriz?
+Nasil ki login bilgisi girerek giris yapariz, API’da da token bilgisi girerek API’ya giris yapabiliriz.
+Bu bilgiyi nereden aliriz?
+Contact List’in oldugu Herokuapp sitesine girdik. Contact List sayfasina geldik. Add a new Contact yazisi ve altinda
+kayit olurken ve sonrasinda girdigimiz bilgilerin yer aldigi sayfada bosluk kisminda saga tikladik, inspect’I sectik ve
+HTML kodlarini gorduk, elements sekmesinde idik Application sekmesini tikladik. Cookies’I asagiya dogru secenekleri ile
+actik ve orada https ile baslayan yeri tiklayinca ya da Local Storage altindaki http’yi secince token’I gorduk ve copyaladik.
+Ancak token’I cikmayanlar oldu. Sayfada logout yapip tekrar submit yapip ayni yere gelenler token’i uzun bir sifre gorduler
+ve kopyaladilar. Kopyalamayi basta dogrudan yapamadik. Uzerine bir kac kez tiklayip HTML kodlarinda ilgili attribute’u
+sectigimiz gibi secili halde gorunce kopyaladik. Postman’a geldik. Authorization’a geldik ve Type kismindan menuyu actik ve
+Bearer Token’i sectik. Kopyaladigimiz token’i address bar’ina yapistirdik ve Send’e basinca asagida Body kisminda yeni
+bir id verilmis olarak bir body halinde bilgilerimizin geldigini gorduk. Save yaptik her zaman oldugu gibi. Boylece API
+ile veritabanina Sign up ile kaydedilen bilgileri alabildik. Bilgileri UI’da gorebildigimiz gibi API ile veritabanindan
+da alabiliyoruz. Ancak bu verileri alabilmemiz icin bir yetkilendirmeye ihtiyac duyduk ve takip ettigimiz yol ile token’i
+bulup yetkimizi de aldik.
+Contact List Dokumentation’da soldaki Users’a tiklayinca orada Add User’i secince yeni bilgiler girerek user olusturabiliriz.
+https://thinking-tester-contact-list.herokuapp.com kismini collection uzerine gelip tiklayinca variable’I sectik ve url
+adini verdigimiz variable’in ister initial ister current value kismina token’I yapistirdik ve save yaptik. Save yapmazsak
+calismaz. Daha sonra Get ve yanindaki url barina geldik ve {{url}}/contacts yazdik. /contacts kismi original url’in son
+kisminda vardi. Biz /contacts kismina kadarkini alip variable bolumune yapistirmistik. Daha sonra save ve send yapinca get
+bar’I icine tum url’I yapistirdigimizda aldigimiz body’i asagida tekrar alabildik.
+Bu defa ayni islemi token’I authorization’dan kopyalayip collection’a tiklayip token isimli variable olusturduk ve
+kopyaladigimiz token’I initial value’ya yapistirip save yaptik.
+Ayrica Authorization kisminda Token yanindaki barda bulunan original token sifreyi silip sadece bir suslu parantez
+yazinca otomatik olarak token yazisi cikti ve onu sectik. Boylece token orada isim hali ile kaldi. Eger token’I ilk hali
+ile kaydememis olsaydik {{token}} seklinde gelmezdi.
+Get Contact Listesi Olusturma’da iken Authorization kismini secip oraya token’I nasil eklediysek yine Practice isimli
+collection’da Authorization kisminda Type yanindaki bar’dan Bearer Token’i secip yine Token barina { bir suslu parantez
+yazinca {{token}} otomatik bir sekilde hazir olarak geldi. Onu da save yaptik.
+Contact List web sitesine geldik. Orada Contacts’dan post Add Contact’I sectik ve post Add Contact altindaki url’in son
+kismi olan /contacts’I kopyaladik ve postman’a donus yaptik. Acili post contact ekleme barina once daha once variable
+olarak kaydettigimiz {{url}} i yazdik ve yanina /contacts ekledik. Post islemi yapinca bir body’e ihtiyacimiz oldugundan
+yine Contact List sayfamiza gidip oradaki body’I aldik ve Post Contact ekleme’de Body, raw, JSON sectikten sonra body k
+ismina body’I ekleyip save ve send yaptik. Ayni body asagida goruldu.
+Contact List sayfamizda yukarida halka halindeki yenileme/refresh butonuna basinca listte bizim basta girdigimiz verilerin
+oldugu satirdan baska en son aldigimiz body icindeki veriler ikinci bir satir olarak goruldu. Web Table gibi Listimiz goruldu.
+Ancak bazimizda bu list gorulmedi daha dogrusu oncesinde token olusmadi ya da ikinci body asagida gorulmedi. Tekrar Contact
+List’e gidip islemeleri tekrar ettik. Bazen bu siteden cikis yapmis isek token’imiz kaybolur ve biz de token’I tekrar alip,
+variable kisminda olan token yerine yenisini yapistiririz. Ya da Contact List’te aldigimiz body’I dogru sekilde kopyalamamis
+olabiliriz. Orada kopyalamayi body yanindaki ust uste iki kucuk kare sekline basinca otomatik kopyalama yapar ve bunu
+postman’de post islemimiz icin sectigimiz body kismina yapistiririz, save ve send ile istedigimiz sonuca ulasiriz.
+Sonucta daha onceden farkli olarak Status’o 200 OK degil 201 Created olarak gorduk. Post ile yeni veri olusturunca
+201 Created’I goruruz.
+Practice collection’dan yeni bir Get islemi icin Add Request’I sectik. ID ile Contact Getirme isimli islem icin url bar
+kismina {{url}}/contacts/ 64d9ca1b97c488001353ac63 bu sondaki kisim post isleminin kaydi sonrasi body basinda olusan
+“-id”: karsisindaki id no. Bunu oradan alip ekledik. Bu id ile contact getirme islemi yapmak istedik. Save ve send ile
+islemi tamamladik.
+Asagida aradigimiz id nolu veriyi body olarak gorduk.  Status ise 200 OK olarak goruldu
+Biz gelen response’daki id numarasini response’dan alabiliriz, bunu bir variable’a kaydedersek onu istedigimiz yerde
+kullanabiliriz. Postman’i actik Post islemi sayfasinda bu defa Params yerine Tests’i sectik. Snippets’dan Set a
+collection variable’I sectik ve bir satirlik verimizi Tests secili iken bosluk alanda gorduk. Bize gelin bir satir
+halindeki verinin parantez kismini su sekilde degistirdik: pm.collectionVariables.set("id", pm.response.json()._id);
+Gercek API testlerinde biz id’leri olusturmayiz. Id’ler otomatik olarak bize gelir
+Id bilgisini almak icin list icindeki veriden id’ye ulasmak icin elimizdeki bilgilerden unique olanlari kullanabiliriz.
+Ornegin email bilgisi ile ya da phone bilgisi ile aradigimiz id’ye ulasabiliriz. Groovy Language bu amacla kullanilir

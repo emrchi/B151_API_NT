@@ -1,0 +1,8 @@
+Ogrendigimiz Assertion Yontemleri
+
+1) Hamcrest Matchers --> (Get03)
+2) jsonPath() --> (Get06)
+3) as() "Map" --> (Get09)
+4) as() "Pojo" --> (Get12)
+5) ObjectMapper.readValue() "Map"--> (Get13)
+6) ObjectMapper.readValue() "Pojo"--> (Get13)
